@@ -1,8 +1,8 @@
-import { STORAGE_KEY } from './modules/auth'
+import { STORAGE_KEY } from './modules/sessions'
 
 const localStoragePlugin = store => {
   store.subscribe((mutation, state) => {
-    const syncedData = { user: state.user, auth: state.auth }
+    const syncedData = { user: state.sessions.user, auth: state.sessions.auth }
     localStorage.setItem(STORAGE_KEY, JSON.stringify(syncedData))
   })
 }

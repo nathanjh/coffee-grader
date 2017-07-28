@@ -25,8 +25,8 @@ const mutations = {
   },
   updateAuth (state, headers) {
     let newAuthHeaders = {
-      accessToken: headers.accessToken,
-      tokenType: headers.tokenType,
+      accessToken: headers['access-token'],
+      tokenType: headers['token-type'],
       client: headers.client,
       expiry: headers.expiry,
       uid: headers.uid
@@ -45,12 +45,14 @@ const actions = {
         password: form.password
       })
       .then((response) => {
-        commit('updateUser', JSON.parse(response.data))
-        commit('updateAuth', JSON.parse(response.headers))
-        resolve(JSON.parse(response.data))
+        console.log(response)
+        commit('updateUser', response.data.user)
+        commit('updateAuth', response.headers)
+        resolve(response.data)
       })
       .catch((error) => {
-        reject(error.response.data)
+        console.log(error)
+        reject(error.data)
       })
     })
   }

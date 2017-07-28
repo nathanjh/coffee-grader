@@ -22,6 +22,7 @@ export default new VueRouter({
 
   routes: [
     { path: '/', component: load('Index') }, // Default
+    { path: '/sign-in', component: load('session/SignIn') },
     { path: '*', component: load('Error404') } // Not found
   ]
 })

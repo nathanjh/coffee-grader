@@ -9,11 +9,14 @@ require(`quasar/dist/quasar.${__THEME}.css`)
 import Vue from 'vue'
 import Quasar from 'quasar'
 import Axios from 'axios'
+import Vuelidate from 'vuelidate'
 import router from './router'
 import store from './store/store'
 
 Vue.prototype.$http = Axios
+
 Vue.use(Quasar) // Install Quasar Framework
+Vue.use(Vuelidate) // Form validation library
 
 Quasar.start(() => {
   /* eslint-disable no-new */
