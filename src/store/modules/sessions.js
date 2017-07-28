@@ -58,8 +58,15 @@ const actions = {
   }
 }
 
+const getters = {
+  isLoggedIn: state => {
+    return state.auth.isLoggedIn
+  }
+}
+
 export default {
   state: initialState,
   mutations,
-  actions
+  actions,
+  getters
 }

@@ -39,10 +39,16 @@
 
 <script>
   import signIn from './session/SignIn'
+  import {mapGetters} from 'vuex'
 
   export default {
     components: {
       signIn
+    },
+    computed: {
+      ...mapGetters({
+        loggedIn: 'isLoggedIn'
+      })
     }
   }
 </script>
