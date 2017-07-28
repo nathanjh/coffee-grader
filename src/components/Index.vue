@@ -4,7 +4,11 @@
       <q-toolbar-title :padding="0">
         Coffee Grader
       </q-toolbar-title>
-      <button @click="$refs.signinModal.open()">
+      <button v-if="loggedIn">
+        Sign out
+        <i>chevron_left</i>
+      </button>
+      <button v-else @click="$refs.signinModal.open()">
         Sign in
         <i>chevron_right</i>
       </button>
