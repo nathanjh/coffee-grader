@@ -71,7 +71,9 @@ export default {
       console.log(`SENT>> email: ${this.form.email}, password: ${this.form.password}`)
       this.$store.dispatch('signIn', this.form)
       .then((response) => console.log(response))
-      .catch((error) => console.log(error))
+      .catch((error) => {
+        error.forEach(e => Toast.create(e))
+      })
     }
   }
 }
