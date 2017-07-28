@@ -4,7 +4,7 @@
       <q-toolbar-title :padding="0">
         Coffee Grader
       </q-toolbar-title>
-      <button v-if="loggedIn">
+      <button v-if="loggedIn" @click="signOut">
         Sign out
         <i>chevron_left</i>
       </button>
@@ -53,6 +53,11 @@
       ...mapGetters({
         loggedIn: 'isLoggedIn'
       })
+    },
+    methods: {
+      signOut () {
+        this.$store.commit('clearAllSessionData')
+      }
     }
   }
 </script>
