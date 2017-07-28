@@ -9,9 +9,7 @@ if (localStorage.getItem(STORAGE_KEY)) {
 }
 else {
   initialState = {
-    user: {
-      name: null
-    },
+    user: null,
     auth: {
       isLoggedIn: false,
       headers: null
@@ -33,6 +31,11 @@ const mutations = {
     }
     if (!state.auth.isLoggedIn) { state.auth.isLoggedIn = true }
     state.auth.headers = newAuthHeaders
+  },
+  clearAllSessionData (state) {
+    state.auth.isLoggedIn = false
+    state.auth.headers = null
+    state.user = null
   }
 }
 
@@ -58,8 +61,15 @@ const actions = {
   }
 }
 
+const getters = {
+  isLoggedIn: state => {
+    return state.auth.isLoggedIn
+  }
+}
+
 export default {
   state: initialState,
   mutations,
-  actions
+  actions,
+  getters
 }
