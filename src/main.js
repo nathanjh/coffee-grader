@@ -8,9 +8,11 @@ require(`quasar/dist/quasar.${__THEME}.css`)
 
 import Vue from 'vue'
 import Quasar from 'quasar'
+import Axios from 'axios'
 import router from './router'
 import store from './store/store'
 
+Vue.prototype.$http = Axios
 Vue.use(Quasar) // Install Quasar Framework
 
 Quasar.start(() => {
