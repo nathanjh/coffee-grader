@@ -60,8 +60,7 @@
         this.$store.commit('clearAllSessionData')
         Toast.create({
           html: 'Successfully signed out',
-          icon: 'eject',
-          bgColor: '#26A69A'
+          icon: 'eject'
         })
       }
     }
