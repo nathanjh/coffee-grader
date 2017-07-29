@@ -30,7 +30,7 @@
             </div>
             <div class="item multiple-lines">
               <div class="item-content">
-                <button class="teal" @click="signIn">Sign In</button>
+                <button class="teal" @click.prevent="signIn">Sign In</button>
               </div>
             </div>
           </div>
