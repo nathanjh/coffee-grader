@@ -72,7 +72,10 @@ export default {
       this.$store.dispatch('signIn', this.form)
       .then((response) => console.log(response))
       .catch((error) => {
-        error.forEach(e => Toast.create(e))
+        error.forEach(e => Toast.create({
+          html: e,
+          icon: 'error_outline'
+        }))
       })
     }
   }
