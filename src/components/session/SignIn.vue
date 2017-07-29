@@ -30,7 +30,7 @@
             </div>
             <div class="item multiple-lines">
               <div class="item-content">
-                <button class="teal" @click="signIn">Sign In</button>
+                <button class="teal" @click.prevent="signIn">Sign In</button>
               </div>
             </div>
           </div>
@@ -72,7 +72,10 @@ export default {
       this.$store.dispatch('signIn', this.form)
       .then((response) => console.log(response))
       .catch((error) => {
-        error.forEach(e => Toast.create(e))
+        error.forEach(e => Toast.create({
+          html: e,
+          icon: 'error_outline'
+        }))
       })
     }
   }

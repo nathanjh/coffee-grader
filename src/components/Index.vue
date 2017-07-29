@@ -44,6 +44,7 @@
 <script>
   import signIn from './session/SignIn'
   import { mapGetters } from 'vuex'
+  import { Toast } from 'quasar'
 
   export default {
     components: {
@@ -57,6 +58,11 @@
     methods: {
       signOut () {
         this.$store.commit('clearAllSessionData')
+        Toast.create({
+          html: 'Successfully signed out',
+          icon: 'eject',
+          bgColor: '#26A69A'
+        })
       }
     }
   }
