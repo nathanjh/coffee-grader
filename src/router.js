@@ -23,6 +23,11 @@ export default new VueRouter({
   routes: [
     { path: '/', component: load('Index') }, // Default
     { path: '/sign-in', component: load('session/SignIn') },
+    {
+      path: '/sign-up',
+      component: load('session/SignUp'),
+      props: (route) => ({ inviteToken: route.query.invite_token })
+    },
     { path: '*', component: load('Error404') } // Not found
   ]
 })

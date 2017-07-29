@@ -47,14 +47,37 @@ const actions = {
         email: form.email,
         password: form.password
       })
-      .then((response) => {
+      .then(response => {
         console.log(response)
         commit('updateUser', response.data.user)
         commit('updateAuth', response.headers)
-        resolve(response.data)
+        resolve(response.data.user)
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error.response)
+        reject(error.response.data.errors)
+      })
+    })
+  },
+  signUp ({commit}, form) {
+    console.log('Sign up!')
+    return new Promise((resolve, reject) => {
+      CoffeeGraderApi.post('auth.json', {
+        name: form.name,
+        username: form.username,
+        email: form.email,
+        password: form.password,
+        password_confirmation: form.confirmPassword,
+        invite_token: form.inviteToken
+      })
+      .then(response => {
+        console.log(response)
+        commit('updateUser', response.data.user)
+        commit('updateAuth', response.headers)
+        resolve(response.data.user)
+      })
+      .catch(error => {
+        console.log(error.response.data.errors)
         reject(error.response.data.errors)
       })
     })
