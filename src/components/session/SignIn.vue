@@ -68,9 +68,8 @@ export default {
         Toast.create('Please review fields and try again.')
         return
       }
-      console.log(`SENT>> email: ${this.form.email}, password: ${this.form.password}`)
       this.$store.dispatch('signIn', this.form)
-      .then(response => console.log(response))
+      .then(response => Toast.create.positive(`Welcome back, ${response.username}.`))
       .catch(error => {
         error.forEach(e => Toast.create({
           html: e,

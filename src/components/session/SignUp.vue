@@ -81,6 +81,12 @@ import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
 import { Toast } from 'quasar'
 
 export default {
+  props: {
+    inviteToken: {
+      type: String,
+      default: ''
+    }
+  },
   data () {
     return {
       form: {
@@ -88,7 +94,8 @@ export default {
         username: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        inviteToken: this.inviteToken
       }
     }
   },
@@ -120,11 +127,9 @@ export default {
         Toast.create('Please review fields and try again.')
         return
       }
-      console.log(this.form)
       this.$store.dispatch('signUp', this.form)
-      .then(response => console.log(response))
+      .then(response => Toast.create.positive(`Welcome, ${response.username}, thanks for signing up!`))
       .catch(error => {
-        console.log(error)
         error.full_messages.forEach(e => Toast.create({
           html: e,
           icon: 'error_outline'
