@@ -43,7 +43,7 @@
 
 <script>
   import signIn from './session/SignIn'
-  import {mapGetters} from 'vuex'
+  import { mapGetters } from 'vuex'
 
   export default {
     components: {
