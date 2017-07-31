@@ -1,5 +1,6 @@
 <template lang="html">
-  <q-modal ref="sessionModal" :content-css="{minWidth: '70vw', minHeight: '70vh'}">
+  <q-modal ref="sessionModal"
+           :content-css="{minHeight: modalHeight, minWidth: '60vw'}">
   <q-layout>
     <div slot="header" class="toolbar">
       <q-toolbar-title class="text-center">{{ headerTitle }}</q-toolbar-title>
@@ -45,6 +46,9 @@ export default {
   computed: {
     headerTitle () {
       return this.signingUp ? 'Sign up for an account' : 'Sign in to your account'
+    },
+    modalHeight () {
+      return this.signingUp ? '97vh' : '60vh'
     }
   },
   watch: {
