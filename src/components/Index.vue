@@ -8,7 +8,7 @@
         Sign out
         <i>chevron_left</i>
       </button>
-      <button v-else @click="$refs.signinModal.open()">
+      <button v-else @click="triggerModal()">
         Sign in
         <i>chevron_right</i>
       </button>
@@ -16,12 +16,13 @@
 
     <router-view class="layout-view"></router-view>
 
+    <session-modal :modalOpen="modalOpen"></session-modal>
     <!--
       Replace following "div" with
       "<router-view class="layout-view">" component
       if using subRoutes
     -->
-    <q-modal ref="signinModal" :content-css="{minWidth: '80vw', minHeight: '80vh'}">
+    <!-- <q-modal ref="signinModal" :content-css="{minWidth: '70vw', minHeight: '60vh'}">
     <q-layout>
       <div slot="header" class="toolbar">
         <q-toolbar-title class="text-center">Sign In</q-toolbar-title>
@@ -36,19 +37,22 @@
         </div>
       </div>
     </q-layout>
-  </q-modal>
+  </q-modal> -->
+
 
   </q-layout>
 </template>
 
 <script>
-  import signIn from './session/SignIn'
+  // import signIn from './session/SignIn'
+  import sessionModal from './session/SessionModal'
   import { mapGetters } from 'vuex'
   import { Toast } from 'quasar'
 
   export default {
     components: {
-      signIn
+      // signIn
+      sessionModal
     },
     computed: {
       ...mapGetters({
@@ -62,6 +66,15 @@
           html: 'Successfully signed out',
           icon: 'eject'
         })
+      },
+      triggerModal () {
+        this.modalOpen = true
+        setTimeout(() => { this.modalOpen = false }, 500)
+      }
+    },
+    data () {
+      return {
+        modalOpen: false
       }
     }
   }
