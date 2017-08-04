@@ -48,7 +48,7 @@ export default {
       return this.signingUp ? 'Sign up for an account' : 'Sign in to your account'
     },
     modalHeight () {
-      return this.signingUp ? '97vh' : '60vh'
+      return this.signingUp ? '97vh' : '70vh'
     }
   },
   watch: {

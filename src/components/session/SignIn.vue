@@ -3,6 +3,20 @@
     <div class="layout-view">
       <div class="layout-padding">
         <div class="card">
+          <div class="item multiple-lines">
+            <div class="item-content row justify-center">
+              <auth-button :bgColor="'#027be3'"
+                           :textColor="'#ffffff'"
+                           :authProvider="'google_oauth2'">
+                Sign in with Google
+              </auth-button>
+            </div>
+          </div>
+          <div class="card-footer text-faded text-italic text-center">
+            or
+          </div>
+        </div>
+        <div class="card">
           <form>
             <div class="list bordered">
               <div class="item multiple-lines">
@@ -55,8 +69,12 @@
 <script>
 import { required, email, minLength } from 'vuelidate/lib/validators'
 import { Toast } from 'quasar'
+import authButton from './AuthButton'
 
 export default {
+  components: {
+    authButton
+  },
   data () {
     return {
       form: {
@@ -88,10 +106,16 @@ export default {
           icon: 'error_outline'
         }))
       })
+    },
+    oauthSignIn (provider) {
+      console.log(`signing in to coffee-grader-api/auth/${provider}`)
     }
   }
 }
 </script>
 
 <style lang="css">
+  .oauth-button {
+    cursor: pointer;
+  }
 </style>
