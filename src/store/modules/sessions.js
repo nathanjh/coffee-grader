@@ -81,6 +81,10 @@ const actions = {
         reject(error.response.data.errors)
       })
     })
+  },
+  oauthSignIn ({commit}, provider) {
+    console.log(`signing in to coffee-grader-api/auth/${provider}`)
+    CoffeeGraderApi.get(`auth/${provider}`)
   }
 }
 

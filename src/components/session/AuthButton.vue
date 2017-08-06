@@ -1,12 +1,13 @@
 <template lang="html">
-  <div id="authButton"
-       :style="backgroundStyle"
-       @click="oauthSignIn(authProvider)">
-    <span class="icon"></span>
-    <span class="buttonText" :style="textStyle">
-      <slot></slot>
-    </span>
-  </div>
+  <a :href="`http://localhost:3000/auth/${authProvider}`">
+    <div id="authButton"
+    :style="backgroundStyle">
+      <span class="icon"></span>
+      <span class="buttonText" :style="textStyle">
+        <slot></slot>
+      </span>
+    </div>
+  </a>
 </template>
 
 <script>
@@ -25,8 +26,8 @@ export default {
     }
   },
   methods: {
-    oauthSignIn (provider) {
-      console.log(`signing in to coffee-grader-api/auth/${provider}`)
+    oauthSignIn () {
+      this.$store.dispatch('oauthSignIn', this.authProvider)
     }
   }
 }
@@ -67,5 +68,4 @@ span.buttonText {
   font-size: 15px;
   font-weight: bold;
 }
-
 </style>
