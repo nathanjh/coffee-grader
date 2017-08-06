@@ -2,7 +2,7 @@
   <a :href="`http://localhost:3000/auth/${authProvider}`">
     <div id="authButton"
     :style="backgroundStyle">
-      <span class="icon"></span>
+      <span class="icon" :style="iconStyle"></span>
       <span class="buttonText" :style="textStyle">
         <slot></slot>
       </span>
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  props: ['bgColor', 'textColor', 'authProvider'],
+  props: ['bgColor', 'textColor', 'authProvider', 'providerIcon'],
   computed: {
     backgroundStyle () {
       return {
@@ -22,6 +22,11 @@ export default {
     textStyle () {
       return {
         color: this.textColor
+      }
+    },
+    iconStyle () {
+      return {
+        background: `no-repeat center/110% url(${this.providerIcon})`
       }
     }
   },
@@ -55,7 +60,6 @@ span.label {
   font-weight: normal;
 }
 span.icon {
-  background: no-repeat center/110% url('../../statics/btn_google_light_normal.png');
   display: inline-block;
   vertical-align: middle;
   width: 42px;

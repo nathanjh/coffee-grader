@@ -7,7 +7,8 @@
             <div class="item-content row justify-center">
               <auth-button :bgColor="'#027be3'"
                            :textColor="'#ffffff'"
-                           :authProvider="'google_oauth2'">
+                           :authProvider="'google_oauth2'"
+                           :providerIcon="'../../statics/btn_google_light_normal.png'">
                 Sign in with Google
               </auth-button>
             </div>
