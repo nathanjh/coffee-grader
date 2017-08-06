@@ -4,6 +4,24 @@
       <div class="layout-padding">
         <div class="card">
           <div class="item multiple-lines">
+            <div class="item-content">
+              <q-search
+                v-model="username"
+                :debounce="600"
+                placeholder="pick a username, and..."
+                icon="">
+              </q-search>
+              <!-- <div class="floating-label">
+                <input required class="full-width"
+                                type="username"
+                                v-model="username"
+                                @input="$v.username.$touch()"
+                                :class="{'has-error': $v.username.$error}">
+                <label>pick a username, and...</label>
+              </div> -->
+            </div>
+          </div>
+          <div class="item multiple-lines">
             <div class="item-content row justify-center">
               <auth-button :bgColor="'#027be3'"
                            :textColor="'#ffffff'"
@@ -13,9 +31,9 @@
               </auth-button>
             </div>
           </div>
-          <div class="card-footer text-faded text-italic text-center">
-            or
-          </div>
+        </div>
+        <div class="row text-faded text-italic justify-center">
+          or
         </div>
         <div class="card">
           <form>
@@ -81,7 +99,8 @@ export default {
       form: {
         email: '',
         password: ''
-      }
+      },
+      username: ''
     }
   },
   validations: {

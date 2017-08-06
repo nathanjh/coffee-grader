@@ -1,5 +1,5 @@
 <template lang="html">
-  <a :href="`http://localhost:3000/auth/${authProvider}`">
+  <a :href="`${baseURL}auth/${authProvider}`">
     <div id="authButton"
     :style="backgroundStyle">
       <span class="icon" :style="iconStyle"></span>
@@ -11,8 +11,14 @@
 </template>
 
 <script>
+import CoffeeGraderApi from '../../api/coffeeGraderApi'
 export default {
   props: ['bgColor', 'textColor', 'authProvider', 'providerIcon'],
+  data () {
+    return {
+      baseURL: CoffeeGraderApi.defaults.baseURL
+    }
+  },
   computed: {
     backgroundStyle () {
       return {
@@ -29,12 +35,12 @@ export default {
         background: `no-repeat center/110% url(${this.providerIcon})`
       }
     }
-  },
-  methods: {
-    oauthSignIn () {
-      this.$store.dispatch('oauthSignIn', this.authProvider)
-    }
   }
+  // methods: {
+  //   oauthSignIn () {
+  //     this.$store.dispatch('oauthSignIn', this.authProvider)
+  //   }
+  // }
 }
 </script>
 
