@@ -1,5 +1,5 @@
 <template lang="html">
-  <a :href="`${baseURL}auth/${authProvider}`">
+  <a :href="`${baseURL}auth/${authProvider}?origin=${authOriginURL}&hashmode=${hashMode}`">
     <div id="authButton"
     :style="backgroundStyle">
       <span class="icon" :style="iconStyle"></span>
@@ -12,6 +12,8 @@
 
 <script>
 import CoffeeGraderApi from '../../api/coffeeGraderApi'
+import router from '../../router'
+
 export default {
   props: ['bgColor', 'textColor', 'authProvider', 'providerIcon'],
   data () {
@@ -34,13 +36,16 @@ export default {
       return {
         background: `no-repeat center/110% url(${this.providerIcon})`
       }
+    },
+    authOriginURL () {
+      if (process.env.NODE_ENV === 'development') {
+        return 'http://localhost:8080/'
+      }
+    },
+    hashMode () {
+      return router.mode === 'hash'
     }
   }
-  // methods: {
-  //   oauthSignIn () {
-  //     this.$store.dispatch('oauthSignIn', this.authProvider)
-  //   }
-  // }
 }
 </script>
 
