@@ -21,12 +21,21 @@ export default new VueRouter({
    */
 
   routes: [
-    { path: '/', component: load('Index') }, // Default
+    {
+      path: '/',
+      component: load('Index'),
+      props: route => ({
+        authToken: route.query.auth_token,
+        clientId: route.query.client_id,
+        expiry: route.query.expiry,
+        uid: route.query.uid
+      })
+    }, // Default
     { path: '/sign-in', component: load('session/SignIn') },
     {
       path: '/sign-up',
       component: load('session/SignUp'),
-      props: (route) => ({ inviteToken: route.query.invite_token })
+      props: route => ({ inviteToken: route.query.invite_token })
     },
     { path: '*', component: load('Error404') } // Not found
   ]

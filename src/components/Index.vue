@@ -51,6 +51,14 @@
       return {
         modalOpen: false
       }
+    },
+    props: ['authToken', 'clientId', 'expiry', 'uid'],
+
+    created () {
+      let propVals = Object.values(this._props)
+      if (propVals.every(val => { return val !== undefined })) {
+        console.log('wooo! we can call the api with these fancy keys...')
+      }
     }
   }
 </script>
