@@ -3,6 +3,21 @@
     <div class="layout-view">
       <div class="layout-padding">
         <div class="card">
+          <div class="item multiple-lines">
+            <div class="item-content row justify-center">
+              <auth-button :bgColor="'#027be3'"
+                           :textColor="'#ffffff'"
+                           :authProvider="'google_oauth2'"
+                           :providerIcon="'../../statics/btn_google_light_normal.png'">
+                Sign in with Google
+              </auth-button>
+            </div>
+          </div>
+        </div>
+        <div class="row text-faded text-italic justify-center">
+          or
+        </div>
+        <div class="card">
           <form>
             <div class="list bordered">
               <div class="item multiple-lines">
@@ -55,8 +70,13 @@
 <script>
 import { required, email, minLength } from 'vuelidate/lib/validators'
 import { Toast } from 'quasar'
+import authButton from './AuthButton'
+import { eventBus } from '../../eventBus'
 
 export default {
+  components: {
+    authButton
+  },
   data () {
     return {
       form: {
@@ -81,7 +101,10 @@ export default {
         return
       }
       this.$store.dispatch('signIn', this.form)
-      .then(response => Toast.create.positive(`Welcome back, ${response.username}.`))
+      .then(response => {
+        this.$emit('successfulSignIn')
+        Toast.create.positive(`Welcome back, ${response.username}.`)
+      })
       .catch(error => {
         error.forEach(e => Toast.create({
           html: e,
@@ -89,9 +112,18 @@ export default {
         }))
       })
     }
+  },
+  created () {
+    eventBus.$on('clearForm', () => {
+      for (let field in this.form) this.form[field] = ''
+      this.$v.form.$reset()
+    })
   }
 }
 </script>
 
 <style lang="css">
+  .oauth-button {
+    cursor: pointer;
+  }
 </style>
