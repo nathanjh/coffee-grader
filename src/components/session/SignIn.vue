@@ -4,24 +4,6 @@
       <div class="layout-padding">
         <div class="card">
           <div class="item multiple-lines">
-            <div class="item-content">
-              <q-search
-                v-model="username"
-                :debounce="600"
-                placeholder="pick a username, and..."
-                icon="">
-              </q-search>
-              <!-- <div class="floating-label">
-                <input required class="full-width"
-                                type="username"
-                                v-model="username"
-                                @input="$v.username.$touch()"
-                                :class="{'has-error': $v.username.$error}">
-                <label>pick a username, and...</label>
-              </div> -->
-            </div>
-          </div>
-          <div class="item multiple-lines">
             <div class="item-content row justify-center">
               <auth-button :bgColor="'#027be3'"
                            :textColor="'#ffffff'"
@@ -89,6 +71,7 @@
 import { required, email, minLength } from 'vuelidate/lib/validators'
 import { Toast } from 'quasar'
 import authButton from './AuthButton'
+import { eventBus } from '../../eventBus'
 
 export default {
   components: {
@@ -99,8 +82,7 @@ export default {
       form: {
         email: '',
         password: ''
-      },
-      username: ''
+      }
     }
   },
   validations: {
@@ -119,17 +101,23 @@ export default {
         return
       }
       this.$store.dispatch('signIn', this.form)
-      .then(response => Toast.create.positive(`Welcome back, ${response.username}.`))
+      .then(response => {
+        this.$emit('successfulSignIn')
+        Toast.create.positive(`Welcome back, ${response.username}.`)
+      })
       .catch(error => {
         error.forEach(e => Toast.create({
           html: e,
           icon: 'error_outline'
         }))
       })
-    },
-    oauthSignIn (provider) {
-      console.log(`signing in to coffee-grader-api/auth/${provider}`)
     }
+  },
+  created () {
+    eventBus.$on('clearForm', () => {
+      for (let field in this.form) this.form[field] = ''
+      this.$v.form.$reset()
+    })
   }
 }
 </script>

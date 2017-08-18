@@ -91,6 +91,7 @@
 <script>
 import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
 import { Toast } from 'quasar'
+import { eventBus } from '../../eventBus'
 
 export default {
   props: {
@@ -140,7 +141,10 @@ export default {
         return
       }
       this.$store.dispatch('signUp', this.form)
-      .then(response => Toast.create.positive(`Welcome, ${response.username}, thanks for signing up!`))
+      .then(response => {
+        this.$emit('successfulSignUp')
+        Toast.create.positive(`Welcome, ${response.username}, thanks for signing up!`)
+      })
       .catch(error => {
         error.full_messages.forEach(e => Toast.create({
           html: e,
@@ -148,6 +152,12 @@ export default {
         }))
       })
     }
+  },
+  created () {
+    eventBus.$on('clearForm', () => {
+      for (let field in this.form) this.form[field] = ''
+      this.$v.form.$reset()
+    })
   }
 }
 </script>

@@ -21,13 +21,13 @@ const mutations = {
   updateUser (state, user) {
     state.user = user
   },
-  updateAuth (state, headers) {
+  updateAuth (state, authObj) {
     let newAuthHeaders = {
-      accessToken: headers['access-token'],
-      tokenType: headers['token-type'],
-      client: headers.client,
-      expiry: headers.expiry,
-      uid: headers.uid
+      'access-token': authObj['access-token'] || authObj['authToken'],
+      'token-type': authObj['token-type'] || 'Bearer',
+      'client': authObj.client || authObj.clientId,
+      'expiry': authObj.expiry,
+      'uid': authObj.uid
     }
     if (!state.auth.isLoggedIn) { state.auth.isLoggedIn = true }
     state.auth.headers = newAuthHeaders
@@ -81,12 +81,34 @@ const actions = {
         reject(error.response.data.errors)
       })
     })
+  },
+  setUserFromOAuth ({commit, state}) {
+    return new Promise((resolve, reject) => {
+      CoffeeGraderApi.get('users', {
+        params: {
+          uid: state.auth.headers.uid
+        },
+        headers: state.auth.headers
+      })
+      .then(response => {
+        console.log(response)
+        commit('updateUser', response.data.user)
+        commit('updateAuth', response.headers)
+        resolve(response.data.user)
+      })
+      .catch(error => {
+        reject(error.response)
+      })
+    })
   }
 }
 
 const getters = {
   isLoggedIn: state => {
     return state.auth.isLoggedIn
+  },
+  currentUser: state => {
+    return state.user
   }
 }
 

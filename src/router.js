@@ -25,10 +25,12 @@ export default new VueRouter({
       path: '/',
       component: load('Index'),
       props: route => ({
-        authToken: route.query.auth_token,
-        clientId: route.query.client_id,
-        expiry: route.query.expiry,
-        uid: route.query.uid
+        authHeaders: {
+          authToken: route.query.auth_token,
+          clientId: route.query.client_id,
+          expiry: route.query.expiry,
+          uid: route.query.uid
+        }
       })
     }, // Default
     { path: '/sign-in', component: load('session/SignIn') },
