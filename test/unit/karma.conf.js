@@ -1,6 +1,6 @@
 // Karma configuration
 // Generated on Tue Aug 29 2017 16:30:03 GMT-0700 (PDT)
-const webPackConfig = require('../../build/webpack.base.conf')
+const webPackConfig = require('../../build/webpack.dev.conf')
 
 module.exports = function(config) {
   config.set({
