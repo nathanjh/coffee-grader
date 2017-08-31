@@ -1,5 +1,7 @@
-import Vue from 'vue'
+// import Vue from 'vue'
+// import { mount } from 'vue-test-utils'
 import SignUp from '../../../src/components/session/SignUp'
+
 
 describe('SignUp.vue', () => {
   it('has a created hook', () => {
