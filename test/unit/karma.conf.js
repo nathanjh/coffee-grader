@@ -1,6 +1,6 @@
 // Karma configuration
 // Generated on Tue Aug 29 2017 16:30:03 GMT-0700 (PDT)
-const webPackConfig = require('../../build/webpack.dev.conf')
+const webpackConfig = require('../../build/webpack.test.conf')
 
 module.exports = function(config) {
   config.set({
@@ -21,7 +21,7 @@ module.exports = function(config) {
       './index.js': ['webpack']
     },
 
-    webpack: webPackConfig,
+    webpack: webpackConfig,
 
     webpackMiddleware: {
       stats: 'errors-only'

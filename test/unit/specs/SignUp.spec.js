@@ -6,6 +6,6 @@ describe('SignUp.vue', () => {
     const Constructor = Vue.extend(SignUp)
     const vm = new Constructor().$mount()
 
-    assert(vm.$el.querySelector('form') !== null)
+    assert.isNotNull(vm.$el.querySelector('form'))
   })
 })
