@@ -2,7 +2,6 @@
 // import { mount } from 'vue-test-utils'
 import SignUp from '../../../src/components/session/SignUp'
 
-
 describe('SignUp.vue', () => {
   it('has a created hook', () => {
     // const Constructor = Vue.extend(SignUp)
